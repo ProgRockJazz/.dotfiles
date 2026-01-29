@@ -12,7 +12,7 @@ _comp_options+=(globdots)
 zmodload zsh/complist
 
 # Add cute theme :)
-eval "$(oh-my-posh init zsh --config $HOME/.config/omp-themes/m365Princess.omp.json)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/omp-themes/M365Princess.omp.json)"
 
 # setup directory stack
 setopt AUTO_PUSHD           # Push the current directory visited on the stack.
