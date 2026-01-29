@@ -1,0 +1,75 @@
+# Shared zshrc config between all devices. Use by adding:
+# if [ -f $HOME/.config/zsh/.zshrc_shared ]; then
+#	 source $HOME/.config/zsh/.zshrc_shared
+# fi
+#
+# to machine's ~/.zshrc
+
+# Setup completion stuff
+source $HOME/.config/zsh/.completion.zsh
+autoload -U compinit; compinit
+_comp_options+=(globdots)
+zmodload zsh/complist
+
+# Add cute theme :)
+eval "$(oh-my-posh init zsh --config $HOME/.config/omp-themes/m365Princess.omp.json)"
+
+# setup directory stack
+setopt AUTO_PUSHD           # Push the current directory visited on the stack.
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+# vim mode
+#bindkey -v
+#export KEYTIMEOUT=1
+#
+## change cursor mode 
+#cursor_mode() {
+#    # See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursor shapes
+#    cursor_block='\e[2 q'
+#    cursor_beam='\e[6 q'
+#
+#    function zle-keymap-select {
+#        if [[ ${KEYMAP} == vicmd ]] ||
+#            [[ $1 = 'block' ]]; then
+#            echo -ne $cursor_block
+#        elif [[ ${KEYMAP} == main ]] ||
+#            [[ ${KEYMAP} == viins ]] ||
+#            [[ ${KEYMAP} = '' ]] ||
+#            [[ $1 = 'beam' ]]; then
+#            echo -ne $cursor_beam
+#        fi
+#    }
+#
+#    zle-line-init() {
+#        echo -ne $cursor_beam
+#    }
+#
+#    zle -N zle-keymap-select
+#    zle -N zle-line-init
+#}
+#
+#cursor_mode
+#
+## add  text objects
+#
+#autoload -Uz select-bracketed select-quoted
+#zle -N select-quoted
+#zle -N select-bracketed
+#for km in viopp visual; do
+#  bindkey -M $km -- '-' vi-up-line-or-history
+#  for c in {a,i}${(s..)^:-\'\"\`\|,./:;=+@}; do
+#    bindkey -M $km $c select-quoted
+#  done
+#  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+#    bindkey -M $km $c select-bracketed
+#  done
+#done
+#
+
+HISTSIZE=40000
+SAVEHIST=40000
+HISTFILE=~/.zsh_history
+alias vim=nvim

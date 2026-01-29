@@ -1,6 +1,0 @@
-# Shared zshrc config between all devices. Use by adding:
-# if [ -f ~/.zshrc_shared ]; then
-#	 source ~/.zshrc_shared
-# fi
-#
-# to machine's ~/.zshrc
