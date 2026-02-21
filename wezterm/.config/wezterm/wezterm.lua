@@ -9,7 +9,7 @@ config.window_padding = {
 	bottom = 2,
 }
 
-config.window_decorations = "RESIZE"
+--config.window_decorations = "RESIZE"
 
 config.colors = theme.colors()
 config.window_frame = theme.window_frame()
