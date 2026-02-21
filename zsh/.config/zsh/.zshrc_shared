@@ -73,3 +73,4 @@ HISTSIZE=40000
 SAVEHIST=40000
 HISTFILE=~/.zsh_history
 alias vim=nvim
+export EDITOR=nvim
