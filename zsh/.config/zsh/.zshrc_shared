@@ -7,6 +7,8 @@
 
 # Setup completion stuff
 source $HOME/.config/zsh/.completion.zsh
+# Add fuzzy fzf bindings
+eval "$(fzf --zsh)"
 autoload -U compinit; compinit
 _comp_options+=(globdots)
 zmodload zsh/complist
@@ -20,6 +22,17 @@ setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
 alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+
+# History config
+setopt INC_APPEND_HISTORY # Immediately push history to file on every command
+HISTSIZE=50000
+SAVEHIST=50000
+HISTFILE=~/.zsh_history
+
+# Editor config
+alias vim=nvim
+export EDITOR=nvim
 
 # vim mode
 #bindkey -v
@@ -69,8 +82,3 @@ for index ({1..9}) alias "$index"="cd +${index}"; unset index
 #done
 #
 
-HISTSIZE=40000
-SAVEHIST=40000
-HISTFILE=~/.zsh_history
-alias vim=nvim
-export EDITOR=nvim
