@@ -34,6 +34,9 @@ HISTFILE=~/.zsh_history
 alias vim=nvim
 export EDITOR=nvim
 
+# Init zoxide
+eval "$(zoxide init zsh)"
+
 # vim mode
 #bindkey -v
 #export KEYTIMEOUT=1
