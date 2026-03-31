@@ -37,6 +37,9 @@ export EDITOR=nvim
 # Init zoxide
 eval "$(zoxide init zsh)"
 
+# Emacs mode at prompt
+bindkey -e 
+
 # vim mode
 #bindkey -v
 #export KEYTIMEOUT=1
