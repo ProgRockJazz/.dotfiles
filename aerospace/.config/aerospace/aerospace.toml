@@ -36,18 +36,19 @@ default-root-container-orientation = 'auto'
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
-# You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
-# Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
-# Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
+# Effectively disables the macOS "Hide application" feature (cmd-h / cmd-alt-h)
+# by auto-unhiding any app that gets hidden.
+# See: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = true
 
 # List of workspaces that should stay alive even when they contain no windows,
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B",
-                         "C", "D", "E", "F", "G", "I", "M", "N", "O", "P", "Q",
-                         "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                         "A", "B", "C", "D", "E", "F", "G", "I", "M", "N",
+                         "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
+                         "Y", "Z"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -108,57 +109,75 @@ on-mode-changed = []
     # end tell'
     # '''
 
+    # NOTE: caps_lock is remapped to Hyper (cmd+ctrl+alt) via Karabiner-Elements.
+    # All bindings below use Hyper (cmd-ctrl-alt-) as the WM modifier so native
+    # cmd-X shortcuts (cmd-1..9 tabs, cmd-h hide, cmd-w close, cmd-tab) stay free.
+
+    # App spawn / window action bindings — mirror hyprland muscle memory
+    cmd-ctrl-alt-q = 'exec-and-forget open -n -a iTerm'                            # hyprland SUPER+Q (terminal)
+    cmd-ctrl-alt-c = 'close'                                                        # hyprland SUPER+C (killactive)
+    cmd-ctrl-alt-e = 'exec-and-forget open -a Finder'                              # hyprland SUPER+E (file manager)
+    cmd-ctrl-alt-v = 'layout floating tiling'                                       # hyprland SUPER+V (togglefloating)
+    cmd-ctrl-alt-f = 'fullscreen'                                                   # hyprland SUPER+F
+    cmd-ctrl-alt-shift-enter = 'exec-and-forget open -n -a "Visual Studio Code"'   # no hyprland mirror; kept for remote-ssh flow
+
+    # Fuzzy pickers (require: brew install choose-gui)
+    # hyper-/ picks any window across all workspaces and focuses it
+    # hyper-? picks a workspace and switches to it
+    cmd-ctrl-alt-slash = 'exec-and-forget /bin/bash -lc "$HOME/.config/aerospace/scripts/window-picker.sh"'
+    cmd-ctrl-alt-shift-slash = 'exec-and-forget /bin/bash -lc "$HOME/.config/aerospace/scripts/workspace-picker.sh"'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    cmd-slash = 'layout tiles horizontal vertical'
-    cmd-comma = 'layout accordion horizontal vertical'
+    cmd-ctrl-alt-comma = 'layout tiles accordion'
+    cmd-ctrl-alt-shift-comma = 'layout horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    cmd-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
-    cmd-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors down'
-    cmd-k = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors up'
-    cmd-l = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors right'
+    cmd-ctrl-alt-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
+    cmd-ctrl-alt-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors down'
+    cmd-ctrl-alt-k = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors up'
+    cmd-ctrl-alt-l = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
-    cmd-shift-h = 'move left'
-    cmd-shift-j = 'move down'
-    cmd-shift-k = 'move up'
-    cmd-shift-l = 'move right'
+    cmd-ctrl-alt-shift-h = 'move --boundaries all-monitors-outer-frame left'
+    cmd-ctrl-alt-shift-j = 'move --boundaries all-monitors-outer-frame down'
+    cmd-ctrl-alt-shift-k = 'move --boundaries all-monitors-outer-frame up'
+    cmd-ctrl-alt-shift-l = 'move --boundaries all-monitors-outer-frame right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-    cmd-minus = 'resize smart -50'
-    cmd-equal = 'resize smart +50'
+    cmd-ctrl-alt-minus = 'resize smart -50'
+    cmd-ctrl-alt-equal = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    cmd-1 = 'workspace 1'
-    cmd-2 = 'workspace 2'
-    cmd-3 = 'workspace 3'
-    cmd-4 = 'workspace 4'
-    cmd-5 = 'workspace 5'
-    cmd-6 = 'workspace 6'
-    cmd-7 = 'workspace 7'
-    cmd-8 = 'workspace 8'
-    cmd-9 = 'workspace 9'
-    cmd-0 = 'workspace 10'
+    cmd-ctrl-alt-1 = 'workspace 1'
+    cmd-ctrl-alt-2 = 'workspace 2'
+    cmd-ctrl-alt-3 = 'workspace 3'
+    cmd-ctrl-alt-4 = 'workspace 4'
+    cmd-ctrl-alt-5 = 'workspace 5'
+    cmd-ctrl-alt-6 = 'workspace 6'
+    cmd-ctrl-alt-7 = 'workspace 7'
+    cmd-ctrl-alt-8 = 'workspace 8'
+    cmd-ctrl-alt-9 = 'workspace 9'
+    cmd-ctrl-alt-0 = 'workspace 10'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-    cmd-shift-1 = 'move-node-to-workspace 1'
-    cmd-shift-2 = 'move-node-to-workspace 2'
-    cmd-shift-3 = 'move-node-to-workspace 3'
-    cmd-shift-4 = 'move-node-to-workspace 4'
-    cmd-shift-5 = 'move-node-to-workspace 5'
-    cmd-shift-6 = 'move-node-to-workspace 6'
-    cmd-shift-7 = 'move-node-to-workspace 7'
-    cmd-shift-8 = 'move-node-to-workspace 8'
-    cmd-shift-9 = 'move-node-to-workspace 9'
-    cmd-shift-0 = 'move-node-to-workspace 10'
+    cmd-ctrl-alt-shift-1 = 'move-node-to-workspace 1'
+    cmd-ctrl-alt-shift-2 = 'move-node-to-workspace 2'
+    cmd-ctrl-alt-shift-3 = 'move-node-to-workspace 3'
+    cmd-ctrl-alt-shift-4 = 'move-node-to-workspace 4'
+    cmd-ctrl-alt-shift-5 = 'move-node-to-workspace 5'
+    cmd-ctrl-alt-shift-6 = 'move-node-to-workspace 6'
+    cmd-ctrl-alt-shift-7 = 'move-node-to-workspace 7'
+    cmd-ctrl-alt-shift-8 = 'move-node-to-workspace 8'
+    cmd-ctrl-alt-shift-9 = 'move-node-to-workspace 9'
+    cmd-ctrl-alt-shift-0 = 'move-node-to-workspace 10'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    cmd-tab = 'workspace-back-and-forth'
+    cmd-ctrl-alt-tab = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-    cmd-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+    cmd-ctrl-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-    cmd-shift-semicolon = 'mode service'
+    cmd-ctrl-alt-shift-semicolon = 'mode service'
 
 # Pin workspaces to monitors by monitor name pattern
 [workspace-to-monitor-force-assignment]
@@ -171,11 +190,7 @@ on-mode-changed = []
 7 = ['secondary', 'main']           # prefer secondary, fallback to main
 8 = ['secondary', 'main']
 9 = ['secondary', 'main']
-0 = ['secondary', 'main']
-
-
-# Keep workspaces alive even when empty (so they don't vanish)
-persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+10 = ['secondary', 'main']
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
