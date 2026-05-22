@@ -121,7 +121,8 @@ on-mode-changed = []
     cmd-ctrl-alt-f = 'fullscreen'                                                   # hyprland SUPER+F
     cmd-ctrl-alt-shift-enter = 'exec-and-forget open -n -a "Visual Studio Code"'   # no hyprland mirror; kept for remote-ssh flow
 
-    # Fuzzy pickers (require: brew install choose-gui)
+    # Fuzzy pickers (require: brew install wezterm fzf)
+    # Picker window is a floating WezTerm popup; see [[on-window-detected]] below.
     # hyper-/ picks any window across all workspaces and focuses it
     # hyper-? picks a workspace and switches to it
     cmd-ctrl-alt-slash = 'exec-and-forget /bin/bash -lc "$HOME/.config/aerospace/scripts/window-picker.sh"'
@@ -207,3 +208,10 @@ on-mode-changed = []
     cmd-shift-j = ['join-with down', 'mode main']
     cmd-shift-k = ['join-with up', 'mode main']
     cmd-shift-l = ['join-with right', 'mode main']
+
+# Float the WezTerm fzf picker popup (see scripts/window-picker.sh,
+# scripts/workspace-picker.sh). Matched by window title set in picker.lua.
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+if.window-title-regex-substring = 'aerospace-picker'
+run = ['layout floating']
