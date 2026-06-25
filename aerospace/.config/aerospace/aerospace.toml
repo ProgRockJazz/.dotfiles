@@ -209,9 +209,9 @@ on-mode-changed = []
     cmd-shift-k = ['join-with up', 'mode main']
     cmd-shift-l = ['join-with right', 'mode main']
 
-# Float the WezTerm fzf picker popup (see scripts/window-picker.sh,
-# scripts/workspace-picker.sh). Matched by window title set in picker.lua.
+# Float the dedicated WezTerm fzf picker popup (see scripts/window-picker.sh,
+# scripts/workspace-picker.sh). This WezTerm config is only used for the picker,
+# so matching by app id is reliable.
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-if.window-title-regex-substring = 'aerospace-picker'
 run = ['layout floating']
