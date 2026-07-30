@@ -20,8 +20,8 @@ config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
 
 -- Open a URL in the local default browser when a remote process emits
--- OSC 1337 SetUserVar=open-url=<base64>. Used by nvim's diffity launcher
--- so a diffity server running over SSH can open the printed URL here.
+-- OSC 1337 SetUserVar=open-url=<base64>. Used by nvim's difit launcher
+-- so a difit server running over SSH can open the printed URL here.
 wezterm.on("user-var-changed", function(_, _, name, value)
 	if name == "open-url" then
 		wezterm.open_with(value)

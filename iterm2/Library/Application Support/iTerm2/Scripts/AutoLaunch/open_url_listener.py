@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # iTerm2 AutoLaunch: opens URLs in the local default browser when a remote
 # process emits OSC 1337 Custom=id=myopenurl:open-url <url>. Paired with
-# nvim's diffity launcher so diffs running on an SSH host open here.
+# nvim's difit launcher so diffs running on an SSH host open here.
 #
 # Install: `stow iterm2` symlinks this to
 # ~/Library/Application Support/iTerm2/Scripts/AutoLaunch/. Requires the
