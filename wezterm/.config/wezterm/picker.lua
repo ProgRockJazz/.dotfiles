@@ -1,6 +1,6 @@
 -- Minimal WezTerm config used only for aerospace fzf pickers.
 -- Invoked via: wezterm --config-file ~/.config/wezterm/picker.lua start -- ...
--- Aerospace identifies the popup by the fixed window title "aerospace-picker"
+-- AeroSpace floats this dedicated WezTerm picker by app id
 -- (see [[on-window-detected]] in aerospace.toml).
 
 local wezterm = require("wezterm")
@@ -27,6 +27,12 @@ config.window_padding = {
 
 wezterm.on("format-window-title", function()
 	return "aerospace-picker"
+end)
+
+-- Ensure the picker grabs keyboard focus when the GUI window appears.
+wezterm.on("gui-startup", function(cmd)
+	local _, _, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():focus()
 end)
 
 return config
